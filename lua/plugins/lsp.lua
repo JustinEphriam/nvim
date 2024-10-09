@@ -59,9 +59,13 @@ return {
       -- Set up C LSP (C)
       require('lspconfig').clangd.setup({lsp_opts})
 
+      -- Set up nim LSP (nim_langserver)
+      require('lspconfig').nim_langserver.setup({lsp_opts})
 
-
-
+      -- TS, HTML, CSS
+      require('lspconfig').ts_ls.setup(lsp_opts)
+      require('lspconfig').cssls.setup(lsp_opts)
+      require('lspconfig').html.setup(lsp_opts)
       -- Completion setup
       local cmp = require('cmp')
       cmp.setup({
