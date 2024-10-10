@@ -62,8 +62,12 @@ return {
       -- Set up nim LSP (nim_langserver)
       require('lspconfig').nim_langserver.setup({lsp_opts})
 
+      -- Deno LSP
+      require('lspconfig').denols.setup({lsp_opts})
+      -- Rust LSP
+      require('lspconfig').rust_analyzer.setup({lsp_opts})
       -- TS, HTML, CSS
-      require('lspconfig').ts_ls.setup(lsp_opts)
+      -- require('lspconfig').ts_ls.setup(lsp_opts)
       require('lspconfig').cssls.setup(lsp_opts)
       require('lspconfig').html.setup(lsp_opts)
       -- Completion setup
