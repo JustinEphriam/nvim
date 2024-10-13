@@ -47,6 +47,8 @@ return {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
 
+      -- Rust LSP
+      require('lspconfig').rust_analyzer.setup(lsp_opts)
       -- Set up Go LSP (gopls)
       require('lspconfig').gopls.setup(lsp_opts)
 
