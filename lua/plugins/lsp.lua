@@ -46,22 +46,14 @@ return {
         on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
-
-      -- Rust LSP
-      require('lspconfig').rust_analyzer.setup(lsp_opts)
+      -- Set up Zig LSP (zls)
+      require('lspconfig').zls.setup({lsp_opts})
       -- Set up Go LSP (gopls)
       require('lspconfig').gopls.setup(lsp_opts)
-
-      -- Set up Zig LSP (zls)
-      require('lspconfig').zls.setup(lsp_opts)
-
       -- Set up Lua LSP (lua_ls)
       require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
-
       -- Set up C LSP (C)
       require('lspconfig').clangd.setup({lsp_opts})
-      -- Ocaml lsp
-      require('lspconfig').ocamllsp.setup({lsp_opts})
       -- Deno LSP
       -- require('lspconfig').denols.setup({lsp_opts})
       -- TS, HTML, CSS
