@@ -50,6 +50,8 @@ return {
       require('lspconfig').zls.setup({lsp_opts})
       -- Set up Go LSP (gopls)
       require('lspconfig').gopls.setup(lsp_opts)
+      -- Set up Rust LSP (rust_analyzer) 
+      require('lspconfig').rust_analyzer.setup(lsp_opts)
       -- Set up Lua LSP (lua_ls)
       require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
       -- Set up C LSP (C)
