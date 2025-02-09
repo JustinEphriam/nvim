@@ -19,9 +19,9 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           -- List the LSP servers you want automatically installed
-          "lua_ls",      -- Lua
-          "html",        -- HTML
-          "cssls",       -- CSS
+          -- "lua_ls",      -- Lua
+          -- "html",        -- HTML
+          -- "cssls",       -- CSS
           "gopls",    -- Elixir
         },
         automatic_installation = true, -- Automatically install configured servers

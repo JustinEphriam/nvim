@@ -6,7 +6,7 @@ return {
         require('lualine').setup({
 
             options = {
-                theme = 'jellybeans'
+                theme = 'nord'
             }
         })
     end

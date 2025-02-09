@@ -6,7 +6,7 @@ return {
     priority = 1000,
     config = function()
       require("kanagawa").setup({
-        transparent = true, -- enable transparency if desired
+        transparent =  true, -- enable transparency if desired
         globalStatus = true, -- enable global statusline
         colors = {
           theme = {
@@ -18,7 +18,7 @@ return {
           },
         },
       })
-      vim.cmd("colorscheme kanagawa")
+      vim.cmd("colorscheme kanagawa-wave")
       
       -- Ensure the line numbers have a transparent or matching background
       vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })  -- line numbers background
@@ -27,5 +27,3 @@ return {
   },
 
 }
-
-

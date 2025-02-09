@@ -8,13 +8,13 @@ return {
       {'hrsh7th/nvim-cmp'},
       {'L3MON4D3/LuaSnip'},
       {'saadparwaiz1/cmp_luasnip'},
+      {'simrat39/rust-tools.nvim'},
     },
     config = function()
       local lsp_zero = require('lsp-zero')
-      -- Set up the LSP attach function to define keybindings
+      
       local lsp_attach = function(client, bufnr)
         local opts = { buffer = bufnr, noremap = true, silent = true }
-        -- LSP-related keybindings
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -25,7 +25,7 @@ return {
         vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end, opts)
         vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, opts)
-        -- Enable format on save
+        
         if client.server_capabilities.documentFormattingProvider then
           vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("Format", { clear = true }),
@@ -34,35 +34,67 @@ return {
           })
         end
       end
-      -- Extend lsp-zero with LSP configurations
+
       lsp_zero.extend_lspconfig({
         sign_text = true,
-        on_attach = lsp_attach,  -- Attach custom keybindings
+        on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       })
 
-      -- Common LSP setup options
       local lsp_opts = {
         on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
-      -- Set up Zig LSP (zls)
-      require('lspconfig').zls.setup({lsp_opts})
-      -- Set up Go LSP (gopls)
+
+      local rust_tools = require('rust-tools')
+      rust_tools.setup({
+        server = {
+          on_attach = function(client, bufnr)
+            lsp_attach(client, bufnr)
+            local opts = { buffer = bufnr }
+            vim.keymap.set('n', '<leader>ra', rust_tools.hover_actions.hover_actions, opts)
+            vim.keymap.set('n', '<leader>rr', rust_tools.runnables.runnables, opts)
+          end,
+          settings = {
+            ['rust-analyzer'] = {
+              checkOnSave = {
+                command = "clippy",
+              },
+              procMacro = {
+                enable = true
+              },
+              diagnostics = {
+                enable = true,
+                experimental = {
+                  enable = true
+                },
+              },
+            }
+          },
+          capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        }
+      })
+
+      require('lspconfig').c3_lsp.setup({
+        cmd = { 
+          "c3lsp",
+          "-c3c-path", "/usr/bin/c3c",
+          "-diagnostics-delay", "1000"
+        },
+        filetypes = { "c3" },
+        root_dir = require("lspconfig.util").root_pattern("project.json"),
+        on_attach = lsp_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      })
+      -- require('lspconfig').gleam.setup({lsp_opts})
+      require('lspconfig').zls.setup(lsp_opts)
+      -- require('lspconfig').ocamllsp.setup(lsp_opts)
       require('lspconfig').gopls.setup(lsp_opts)
-      -- Set up Rust LSP (rust_analyzer) 
-      require('lspconfig').rust_analyzer.setup(lsp_opts)
-      -- Set up Lua LSP (lua_ls)
       require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
-      -- Set up C LSP (C)
-      require('lspconfig').clangd.setup({lsp_opts})
-      -- Deno LSP
-      -- require('lspconfig').denols.setup({lsp_opts})
-      -- TS, HTML, CSS
-      require('lspconfig').ts_ls.setup(lsp_opts)
-      require('lspconfig').cssls.setup(lsp_opts)
-      require('lspconfig').html.setup(lsp_opts)
-      -- Completion setup
+      require('lspconfig').clangd.setup(lsp_opts)
+      require('lspconfig').ols.setup(lsp_opts)
+      -- require('lspconfig').denols.setup(lsp_opts)
+
       local cmp = require('cmp')
       cmp.setup({
         mapping = {
@@ -79,13 +111,3 @@ return {
     end,
   },
 }
-
-
-
-
-
-
-
-
-
-
