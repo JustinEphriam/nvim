@@ -2,11 +2,11 @@
 return {
 
   { 
-    "catppuccin/nvim", name = "catppuccin",
+    "rebelot/kanagawa.nvim", name = "kanagawa",
     lazy = false,
     priority = 1000,
     config = function()
-      require("catppuccin").setup({
+      require("kanagawa").setup({
         transparent =  true, -- enable transparency if desired
         globalStatus = true, -- enable global statusline
         colors = {
@@ -19,7 +19,7 @@ return {
           },
         },
       })
-      vim.cmd("colorscheme catppuccin-mocha")
+      vim.cmd("colorscheme kanagawa-wave")
       
       -- Ensure the line numbers have a transparent or matching background
       vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })  -- line numbers background
