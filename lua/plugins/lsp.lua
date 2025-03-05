@@ -96,6 +96,7 @@ return {
       -- require('lspconfig').denols.setup(lsp_opts)
       -- require('lspconfig').cssls.setup(lsp_opts)
       -- require('lspconfig').html.setup(lsp_opts)
+      require('lspconfig').ts_ls.setup(lsp_opts)
       local cmp = require('cmp')
       cmp.setup({
         mapping = {

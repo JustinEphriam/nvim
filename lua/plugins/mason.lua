@@ -22,7 +22,7 @@ return {
           -- "lua_ls",      -- Lua
           -- "html",        -- HTML
           -- "cssls",       -- CSS
-          "gopls",    -- Elixir
+          -- "gopls",    -- Elixir
         },
         automatic_installation = true, -- Automatically install configured servers
       })
