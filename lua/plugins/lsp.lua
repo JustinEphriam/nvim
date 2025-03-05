@@ -86,16 +86,16 @@ return {
         on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       })
-      require('lspconfig').gleam.setup({lsp_opts})
+      -- require('lspconfig').gleam.setup({lsp_opts})
       require('lspconfig').zls.setup(lsp_opts)
       -- require('lspconfig').ocamllsp.setup(lsp_opts)
-      require('lspconfig').gopls.setup(lsp_opts)
+      -- require('lspconfig').gopls.setup(lsp_opts)
       require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
       require('lspconfig').clangd.setup(lsp_opts)
-      require('lspconfig').ols.setup(lsp_opts)
-      require('lspconfig').denols.setup(lsp_opts)
-      require('lspconfig').cssls.setup(lsp_opts)
-      require('lspconfig').html.setup(lsp_opts)
+      -- require('lspconfig').ols.setup(lsp_opts)
+      -- require('lspconfig').denols.setup(lsp_opts)
+      -- require('lspconfig').cssls.setup(lsp_opts)
+      -- require('lspconfig').html.setup(lsp_opts)
       local cmp = require('cmp')
       cmp.setup({
         mapping = {
