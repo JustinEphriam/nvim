@@ -92,11 +92,12 @@ return {
       -- require('lspconfig').gopls.setup(lsp_opts)
       require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
       require('lspconfig').clangd.setup(lsp_opts)
-      -- require('lspconfig').ols.setup(lsp_opts)
+      require('lspconfig').ols.setup(lsp_opts)
       -- require('lspconfig').denols.setup(lsp_opts)
       -- require('lspconfig').cssls.setup(lsp_opts)
       -- require('lspconfig').html.setup(lsp_opts)
       require('lspconfig').ts_ls.setup(lsp_opts)
+      require('lspconfig').solargraph.setup(lsp_opts)
       local cmp = require('cmp')
       cmp.setup({
         mapping = {
