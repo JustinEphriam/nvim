@@ -8,7 +8,6 @@ return {
       {'hrsh7th/nvim-cmp'},
       {'L3MON4D3/LuaSnip'},
       {'saadparwaiz1/cmp_luasnip'},
-      {'simrat39/rust-tools.nvim'},
     },
     config = function()
       local lsp_zero = require('lsp-zero')
@@ -46,35 +45,6 @@ return {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
 
-      local rust_tools = require('rust-tools')
-      rust_tools.setup({
-        server = {
-          on_attach = function(client, bufnr)
-            lsp_attach(client, bufnr)
-            local opts = { buffer = bufnr }
-            vim.keymap.set('n', '<leader>ra', rust_tools.hover_actions.hover_actions, opts)
-            vim.keymap.set('n', '<leader>rr', rust_tools.runnables.runnables, opts)
-          end,
-          settings = {
-            ['rust-analyzer'] = {
-              checkOnSave = {
-                enable = true
-              },
-              procMacro = {
-                enable = true
-              },
-              diagnostics = {
-                enable = true,
-                experimental = {
-                  enable = true
-                },
-              },
-            }
-          },
-          capabilities = require('cmp_nvim_lsp').default_capabilities(),
-        }
-      })
-
       require('lspconfig').c3_lsp.setup({
         cmd = { 
           "c3lsp",
@@ -86,7 +56,7 @@ return {
         on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       })
-      require('lspconfig').gleam.setup({lsp_opts})
+      require('lspconfig').gleam.setup(lsp_opts)
       require('lspconfig').zls.setup(lsp_opts)
       require('lspconfig').ocamllsp.setup(lsp_opts)
       require('lspconfig').gopls.setup(lsp_opts)
@@ -97,6 +67,7 @@ return {
       require('lspconfig').cssls.setup(lsp_opts)
       require('lspconfig').html.setup(lsp_opts)
       require('lspconfig').ts_ls.setup(lsp_opts)
+      
       local cmp = require('cmp')
       cmp.setup({
         mapping = {
@@ -110,6 +81,62 @@ return {
           { name = 'luasnip' },
         },
       })
+    end,
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+    ft = { 'rust' },
+    config = function()
+      vim.g.rustaceanvim = {
+        -- Plugin configuration
+        tools = {
+          -- Automatically set inlay hints (type hints)
+          -- There is an issue due to which the arguments are not shown
+          inlay_hints = {
+            auto = true,
+          },
+        },
+        -- LSP configuration
+        server = {
+          on_attach = function(client, bufnr)
+            -- Custom keymaps for Rust
+            local opts = { buffer = bufnr, noremap = true, silent = true }
+            vim.keymap.set('n', '<leader>ra', function()
+              vim.cmd.RustLsp('hover', 'actions')
+            end, opts)
+            vim.keymap.set('n', '<leader>rr', function()
+              vim.cmd.RustLsp('runnables')
+            end, opts)
+            vim.keymap.set('n', '<leader>rd', function()
+              vim.cmd.RustLsp('debuggables')
+            end, opts)
+          end,
+          default_settings = {
+            -- rust-analyzer language server configuration
+            ['rust-analyzer'] = {
+              checkOnSave = {
+                enable = true,
+                command = "clippy",
+              },
+              procMacro = {
+                enable = true,
+              },
+              diagnostics = {
+                enable = true,
+                experimental = {
+                  enable = true,
+                },
+              },
+            },
+          },
+        },
+        -- DAP configuration
+        dap = {
+          -- Configuration here
+        },
+      }
     end,
   },
 }
