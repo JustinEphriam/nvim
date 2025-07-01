@@ -57,7 +57,7 @@ return {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       })
       require('lspconfig').gleam.setup(lsp_opts)
-      require('lspconfig').zls.setup(lsp_opts)
+      -- require('lspconfig').zls.setup(lsp_opts)
       require('lspconfig').ocamllsp.setup(lsp_opts)
       require('lspconfig').gopls.setup(lsp_opts)
       require('lspconfig').lua_ls.setup(lsp_zero.nvim_lua_ls())
