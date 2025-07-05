@@ -43,6 +43,8 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.filetype.add({ extension = { roc = "roc" } })
+
 
 -- Setup lazy.nvim
 require("lazy").setup({
