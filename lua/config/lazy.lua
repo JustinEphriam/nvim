@@ -44,6 +44,8 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.filetype.add({ extension = { roc = "roc" } })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.open_float)
+
 
 
 -- Setup lazy.nvim
