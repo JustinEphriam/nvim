@@ -45,6 +45,7 @@ return {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
 
+
       require('lspconfig').c3_lsp.setup({
         cmd = { 
           "c3lsp",
@@ -56,7 +57,7 @@ return {
         on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       })
-      -- require('lspconfig').gleam.setup(lsp_opts)
+      require('lspconfig').gleam.setup(lsp_opts)
       require('lspconfig').zls.setup(lsp_opts)
       -- require('lspconfig').ocamllsp.setup(lsp_opts)
       require('lspconfig').gopls.setup(lsp_opts)

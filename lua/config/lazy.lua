@@ -48,6 +48,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.open_float)
 
 
 
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
