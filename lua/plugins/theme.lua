@@ -1,4 +1,3 @@
-
 return {
 
     { 
@@ -28,3 +27,15 @@ return {
     },
 
 }
+
+
+-- theme = Ayu Mirage
+-- font-family = "Monaspace Argon SemiBold"
+-- font-size = 16
+-- cursor-style = "block"
+-- cursor-style-blink = true
+-- mouse-hide-while-typing = true
+-- window-vsync = true
+-- background-opacity = 1.0
+-- command = /usr/bin/nu
+-- keybind = shift+enter=text:\n
