@@ -44,10 +44,10 @@ return {
         on_attach = lsp_attach,
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       }
-
+    
       -- New vim.lsp.config API
       vim.lsp.config('c3_lsp', {
-        cmd = { 
+        cmd = {
           "c3lsp",
           "-c3c-path", "/usr/bin/c3c",
           "-diagnostics-delay", "1000"
@@ -59,40 +59,41 @@ return {
 
       -- vim.lsp.config('gleam', {})
       -- vim.lsp.enable('gleam')
-      
+
       vim.lsp.config('zls', {})
       vim.lsp.enable('zls')
-      
+
       -- vim.lsp.config('ocamllsp', {})
       -- vim.lsp.enable('ocamllsp')
-      
+
       vim.lsp.config('gopls', {})
       vim.lsp.enable('gopls')
-      
+
       vim.lsp.config('lua_ls', lsp_zero.nvim_lua_ls())
       vim.lsp.enable('lua_ls')
-      
+
       vim.lsp.config('clangd', {})
       vim.lsp.enable('clangd')
-      
+
       vim.lsp.config('ols', {})
       vim.lsp.enable('ols')
-      
+
       -- vim.lsp.config('denols', {})
       -- vim.lsp.enable('denols')
-      
+
       vim.lsp.config('cssls', {})
       vim.lsp.enable('cssls')
-      
+
       vim.lsp.config('html', {})
       vim.lsp.enable('html')
-      
+
       vim.lsp.config('ts_ls', {})
       vim.lsp.enable('ts_ls')
-      
+
       vim.lsp.config('roc_ls', {})
       vim.lsp.enable('roc_ls')
-      
+
+
       local cmp = require('cmp')
       cmp.setup({
         mapping = {
