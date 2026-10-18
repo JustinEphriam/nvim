@@ -16,10 +16,9 @@ vim.pack.add({
 vim.cmd.colorscheme('melange')
 
 -- Mini plugins
-require('mini.basics').setup()
 require('mini.surround').setup()
 require('mini.pairs').setup()
-require('mini.fuzzy').setup()
+require('mini.pick').setup()
 
 
 
@@ -159,7 +158,9 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Quick file navigation
 vim.keymap.set("n", "<leader>e", ":Explore<CR>", { desc = "Open file explorer" })
-vim.keymap.set("n", "<leader>ff", ":find ", { desc = "Find file" })
+vim.keymap.set("n", "<leader>ff", ":Pick files<CR>", { desc = "Find files" })
+vim.keymap.set("n", "<leader>fg", ":Pick grep_live<CR>", { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fb", ":Pick buffers<CR>", { desc = "Find buffers" })
 
 -- Better J behavior
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
