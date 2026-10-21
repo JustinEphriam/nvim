@@ -4,12 +4,14 @@ vim.g.maplocalleader = " "                         -- Set local leader key
 
 -- Add plugins
 vim.pack.add({
-'https://github.com/savq/melange-nvim',
 'https://github.com/nvim-mini/mini.nvim',
 'https://github.com/neovim/nvim-lspconfig',
 'https://github.com/nvim-treesitter/nvim-treesitter',
+'https://github.com/catppuccin/nvim',
+'savq/melange-nvim',
 })
 
+vim.treesitter.language.register('zig', { 'zig' })
 
 
 -- Enable plugins and options
@@ -649,13 +651,34 @@ local function setup_lsp()
   })
 
   -- Ensure ~/go/bin is in PATH so Neovim can find gopls
-  local gobin = vim.fn.expand('~/go/bin')
+  local gobin = vim.fn.expand('~/usr/bin/')
   if not vim.env.PATH:find(gobin, 1, true) then
     vim.env.PATH = gobin .. ':' .. vim.env.PATH
   end
 
+  -- Goose filetype and LSP configuration
+  vim.filetype.add({ extension = { goose = 'goose' } })
+
+  vim.lsp.commands['goose.showInstantiations'] = function(command)
+    vim.ui.select(command.arguments[2], { prompt = 'Instantiations of ' .. command.arguments[1] }, function() end)
+  end
+
+  local goose_bin = vim.fn.exepath('goose') ~= '' and 'goose'
+    or vim.fn.expand('~/bin/goose-v2026.3-linux-x64/goose')
+
+  vim.lsp.config('goose', {
+    cmd = { goose_bin, 'lsp' },
+    filetypes = { 'goose' },
+    root_markers = { '.git' },
+    init_options = { commands = { 'goose.showInstantiations' } },
+  })
+
   -- Enable language servers after LspAttach autocmd is registered
-  vim.lsp.enable({ 'lua_ls', 'gopls', 'rust_analyzer' })
+  vim.lsp.enable({ 'lua_ls', 'gopls', 'rust_analyzer', 'zls', 'ols', 'ts_ls', 'goose' })
+
+  -- vim.lsp.config('gopls', {
+      -- cmd = {'~usr/bin/'},
+  -- })
 end
 
 -- LSP diagnostic keymaps (always available)
